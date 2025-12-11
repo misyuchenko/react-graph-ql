@@ -1,16 +1,12 @@
-import { type FC } from "react";
-import $style from './ChatWindow.module.css';
+import { useState, type FC } from "react";
+import $style from "./ChatWindow.module.css";
 
-const  ChatWindow: FC = () => {
+const ChatWindow: FC = () => {
+  const [messages, setMessages] = useState<string[]>([]);
 
+  return <section className={$style.container}>
 
-
-
-  return  (
-    <section className={$style.container}>
-
-    </section>
-  )
-}
+  </section>;
+};
 
 export default ChatWindow;
