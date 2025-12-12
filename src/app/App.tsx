@@ -1,29 +1,37 @@
-import  { useEffect, type FC } from "react";
+import type { FC } from "react";
 import router from "./router";
-import {
-    RouterProvider,
-} from "react-router";
+import { RouterProvider } from "react-router";
 import { authService } from "@/features/auth/auth.service";
-
-
 import "./App.css";
 
-const  App:FC = () => {
+import { useQuery } from "@apollo/client/react";
+import { WHO_AM_I_QUERY } from "@/graphql/auth.queries";
 
-useEffect(() => {
-  // Проверяем whoAmI только если пользователь аутентифицирован
-  if (authService.isAuthenticated()) {
-    authService.whoAmI().catch((error) => {
-      console.error("Failed to verify authentication:", error);
-      // Если токен невалиден, удаляем его
-      authService.logout();
-    });
+const App: FC = () => {
+  const hasToken = authService.hasToken();
+
+  const { loading, error, data } = useQuery(WHO_AM_I_QUERY, {
+    skip: !hasToken,
+  });
+
+  if (loading && hasToken) {
+    return <div>Loading...</div>;
   }
-}, []);
 
-  return (
-    <RouterProvider router={router} />
-  )
-}
+  if (error && hasToken) {
+    console.error("WhoAmI error:", error);
+
+    authService.clear();
+  }
+
+  if (data?.whoAmI) {
+    console.log("Current user:", data.whoAmI.username);
+    router.navigate("/");
+  } else {
+    router.navigate("/login");
+  }
+
+  return <RouterProvider router={router} />;
+};
 
 export default App;

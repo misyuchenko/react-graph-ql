@@ -25,7 +25,6 @@ interface searchUsersResponse {
   }[];
 }
 
-const mutations = {};
 const queries = {
   loadMessages: gql`
     query LoadMessages {
@@ -69,9 +68,7 @@ export const chatService = {
       throw error;
     }
   },
-  searchUsers: async (
-    searchTerm: string,
-  ): Promise<searchUsersResponse> => {
+  searchUsers: async (searchTerm: string): Promise<searchUsersResponse> => {
     try {
       const { data } = await client.query<searchUsersResponse>({
         query: queries.searchUsers,
