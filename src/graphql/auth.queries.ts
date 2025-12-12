@@ -1,6 +1,11 @@
 import { gql, type TypedDocumentNode } from "@apollo/client";
+import type {
+  LoginResponse,
+  LoginInput,
+  WhoAmIResponse,
+} from "@/features/auth/auth.types";
 
-export const LOGIN_MUTATION: TypedDocumentNode<{ signIn: { accessToken: string }}> = gql`
+export const LOGIN_MUTATION: TypedDocumentNode<LoginResponse, LoginInput> = gql`
   mutation SignIn($username: String!, $password: String!) {
     signIn(input: { username: $username, password: $password }) {
       accessToken
@@ -8,7 +13,7 @@ export const LOGIN_MUTATION: TypedDocumentNode<{ signIn: { accessToken: string }
   }
 `;
 
-export const WHO_AM_I = gql`
+export const WHO_AM_I_QUERY: TypedDocumentNode<WhoAmIResponse> = gql`
   query WhoAmI {
     whoAmI {
       username

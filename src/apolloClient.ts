@@ -1,5 +1,12 @@
-import { ApolloClient, ApolloLink, HttpLink, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 import { config } from "@/config";
+import { authService } from "./features/auth/auth.service";
+
 const URL = config.graphQlApi;
 
 const httpLink = new HttpLink({
@@ -7,7 +14,7 @@ const httpLink = new HttpLink({
 });
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem("authToken");
+  const token = authService.getToken();
 
   operation.setContext(({ headers = {} }) => {
     if (token) {
