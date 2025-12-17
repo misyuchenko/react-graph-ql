@@ -2,10 +2,12 @@ import { type FC, useState } from "react";
 import $style from "./LoginView.module.css";
 import { useMutation } from "@apollo/client/react";
 import { LOGIN_MUTATION } from "@/graphql/auth.queries";
-import { authService } from "./auth.service";
 import router from "@/app/router";
+import { useAppDispatch } from "@/app/hooks";
+import { setToken } from "./authSlice";
 
 const LoginView: FC = () => {
+  const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +20,7 @@ const LoginView: FC = () => {
   };
 
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
-    refetchQueries: ["WhoAmI"], 
+    refetchQueries: ["WhoAmI"],
   });
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,7 +32,7 @@ const LoginView: FC = () => {
       });
 
       if (result.data?.signIn) {
-        authService.setToken(result.data.signIn.accessToken);
+        dispatch(setToken(result.data.signIn.accessToken));
         router.navigate("/");
       }
     } catch (err) {

@@ -46,6 +46,18 @@ const queries = {
       }
     }
   `,
+  getUserChats: gql`
+    query GetUserChats {
+      getChats {
+        id
+        title
+        createdAt
+        participants {
+          username
+        }
+      }
+    }
+  `,
 };
 
 export const chatService = {
@@ -82,6 +94,22 @@ export const chatService = {
       return data;
     } catch (error) {
       console.error("searchUsers error:", error);
+      throw error;
+    }
+  },
+  getUserChats: async () => {
+    try {
+      const { data } = await client.query({
+        query: queries.getUserChats,
+      });
+
+      if (!data) {
+        throw new Error("No data returned from getUserChats query");
+      }
+
+      return data;
+    } catch (error) {
+      console.error("getUserChats error:", error);
       throw error;
     }
   },

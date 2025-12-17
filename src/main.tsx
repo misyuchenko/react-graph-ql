@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./app/App.tsx";
 import client from "./apolloClient";
-import { store } from "./store";
+import { store } from "./app/store";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
