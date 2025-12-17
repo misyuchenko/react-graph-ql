@@ -10,7 +10,7 @@ export const authService = {
   },
 
   removeToken(): void {
-    localStorage.removeItem(TOKEN_KEY);
+    // localStorage.removeItem(TOKEN_KEY);
   },
 
   clear(): void {

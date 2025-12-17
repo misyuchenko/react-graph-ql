@@ -1,19 +1,19 @@
 import { useQuery } from "@apollo/client/react";
 import { WHO_AM_I_QUERY } from "@/graphql/auth.queries";
-import { authService } from "./auth.service";
+import { useAppSelector } from "@/app/hooks";
 
 export const useAuth = () => {
-  const hasToken = authService.hasToken();
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 
   const { loading, error, data, refetch } = useQuery(WHO_AM_I_QUERY, {
-    skip: !hasToken,
+    skip: !isAuthenticated,
   });
 
   return {
     loading,
     error,
-    user: data?.whoAmI,
-    hasToken,
+    user: user || data?.whoAmI,
+    isAuthenticated,
     refetch,
   };
 };

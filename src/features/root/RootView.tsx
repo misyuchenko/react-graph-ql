@@ -1,32 +1,32 @@
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import SearchUser from "./components/search-user/SearchUser";
 import $style from "./RootView.module.css";
 import { chatService } from "@/service/chat.service";
-
+import ChatList from "../chat-list/ChatList";
+import Header from "./components/header/Header";
+import Chat from "../chat/components/Chat";
 const RootView: FC = () => {
-  const [users, setUsers] = useState<string[]>([]);
+  const [chats, setChats] = useState<string[]>([]);
 
-  
-
-  const handleSearchUsers = async (searchTerm: string) => {
+  const getUserChats = async () => {
     try {
-      const response = await chatService.searchUsers(searchTerm);
-      setUsers(response.searchUsers.map((user) => user.username));
-      console.log("Search results:", response);
+      const { geChats } = await chatService.getUserChats();
+      setChats(geChats);
     } catch (error) {
-      console.error("Search failed:", error);
+      console.error("Failed to fetch user chats:", error);
     }
   };
 
+  useEffect(() => {
+    getUserChats();
+  }, []);
+
   return (
-    <main className={$style.RootView}>
-      <section
-        className={`${$style.RootView__section} ${$style.RootView__section_top}`}
-      >
-        <SearchUser onSearchUsers={handleSearchUsers} users={users} />
-      </section>
-      <section className={$style.RootView__section}>2</section>
-    </main>
+    <>
+      <Header />
+      <ChatList chats={chats} />
+      <Chat />
+    </>
   );
 };
 

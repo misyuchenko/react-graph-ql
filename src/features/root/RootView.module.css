@@ -1,15 +1,4 @@
 .RootView {
   display: flex;
   gap: 20px;
-  padding: 20px;
-
-  .section {
-    flex-grow: 0.7;
-    border: 2px solid black;
-  }
-
-  .section_left {
-    flex-grow: 0.3;
-  }
-
 }
