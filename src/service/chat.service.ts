@@ -25,7 +25,7 @@ interface searchUsersResponse {
   }[];
 }
 
-const queries = {
+export const queries = {
   loadMessages: gql`
     query LoadMessages {
       loadMessages(chatId: $chatId, cursor: $cursor, direction: $direction) {

@@ -2,10 +2,6 @@ import { useEffect, useState, type FC } from "react";
 import $style from "./SearchUser.module.css";
 import { useDebounce } from "@/hooks/useDebounce";
 
-
-
-
-
 const SearchUser: FC<{
   onSearchUsers: (searchTerm: string) => void;
   users: string[];
@@ -22,8 +18,6 @@ const SearchUser: FC<{
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
-
-  
 
   return (
     <nav className={$style.SearchUser}>
