@@ -1,8 +1,20 @@
 import type { FC } from "react";
 import $styles from "./Header.module.css";
+import SearchUser from "../search-user/SearchUser";
+import { useSearchUser } from "./useSearchUser";
 
 const Header: FC = () => {
-  return <header className={$styles.Header}>Header</header>;
+  const { users, handleSearch } = useSearchUser();
+
+  const handleSearchUsers = async (searchTerm: string) => {
+    await handleSearch(searchTerm);
+  };
+
+  return (
+    <header className={$styles.Header}>
+      <SearchUser users={users} onSearchUsers={handleSearchUsers} />
+    </header>
+  );
 };
 
 export default Header;
