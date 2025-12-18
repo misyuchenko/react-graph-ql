@@ -4,15 +4,16 @@ import SearchUser from "../search-user/SearchUser";
 import { useSearchUser } from "./useSearchUser";
 
 const Header: FC = () => {
-  const { users, handleSearch } = useSearchUser();
+  const { users, loading, handleSearch } = useSearchUser();
 
   const handleSearchUsers = async (searchTerm: string) => {
     await handleSearch(searchTerm);
   };
 
+
   return (
     <header className={$styles.Header}>
-      <SearchUser users={users} onSearchUsers={handleSearchUsers} />
+      <SearchUser users={users} onSearchUsers={handleSearchUsers} loading={loading} />
     </header>
   );
 };
