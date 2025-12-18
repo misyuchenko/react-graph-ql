@@ -5,7 +5,8 @@ import { useDebounce } from "@/hooks/useDebounce";
 const SearchUser: FC<{
   onSearchUsers: (searchTerm: string) => void;
   users: string[];
-}> = ({ onSearchUsers, users }) => {
+  loading?: boolean;
+}> = ({ onSearchUsers, users, loading }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
@@ -27,6 +28,7 @@ const SearchUser: FC<{
         value={searchTerm}
         onChange={handleSearchChange}
       />
+      {loading && <p>Loading...</p>}
       <ul className={$style.SearchUser__usersList}>
         {users.map((user) => (
           <li key={user}>{user}</li>

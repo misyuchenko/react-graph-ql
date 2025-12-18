@@ -5,7 +5,6 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { config } from "@/config";
-import { store } from "./app/store";
 
 const URL = config.graphQlApi;
 
@@ -14,7 +13,7 @@ const httpLink = new HttpLink({
 });
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = store.getState().auth.token;
+  const token = localStorage.getItem("token");
 
   operation.setContext(({ headers = {} }) => {
     if (token) {
