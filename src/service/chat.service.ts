@@ -1,34 +1,64 @@
-import client from "@/apolloClient";
 import { gql } from "@apollo/client";
 
-interface loadMessagesInput {
+export interface LoadMessagesInput {
   chatId: string;
   cursor?: string;
-  direction?: "ASC" | "DESC";
 }
 
-interface loadMessagesResponse {
-  loadMessages: {
-    id: string;
-    chatId: string;
-    sender: {
-      username: string;
-    };
-    text: string;
-    createdAt: string;
-  }[];
+export interface Message {
+  id: string;
+  chatId: string;
+  sender: {
+    username: string;
+  };
+  text: string;
+  createdAt: string;
 }
 
-interface searchUsersResponse {
+export interface LoadMessagesResponse {
+  loadMessages: Message[];
+}
+
+export interface SearchUsersResponse {
   searchUsers: {
     username: string;
   }[];
 }
 
+export interface Chat {
+  id: string;
+  title: string;
+  createdAt: string;
+  participants: {
+    username: string;
+  }[];
+}
+
+export interface GetUserChatsResponse {
+  getChats: Chat[];
+}
+
+export interface CreateChatInput {
+  username: string;
+}
+
+export interface CreateChatResponse {
+  createChat: Chat;
+}
+
+export interface SendMessageInput {
+  chatId: string;
+  text: string;
+}
+
+export interface SendMessageResponse {
+  sendMessage: Message;
+}
+
 export const queries = {
   loadMessages: gql`
-    query LoadMessages {
-      loadMessages(chatId: $chatId, cursor: $cursor, direction: $direction) {
+    query LoadMessages($chatId: ID!, $cursor: ID) {
+      loadMessages(chatId: $chatId, cursor: $cursor) {
         id
         chatId
         sender {
@@ -60,57 +90,30 @@ export const queries = {
   `,
 };
 
-export const chatService = {
-  loadMessages: async (
-    input: loadMessagesInput,
-  ): Promise<loadMessagesResponse> => {
-    try {
-      const { data } = await client.query<loadMessagesResponse>({
-        query: queries.loadMessages,
-        variables: input,
-      });
-
-      if (!data) {
-        throw new Error("No data returned from loadMessages query");
+export const mutations = {
+  createChat: gql`
+    mutation CreateChat($username: String!) {
+      createChat(input: { username: $username }) {
+        id
+        title
+        createdAt
+        participants {
+          username
+        }
       }
-
-      return data;
-    } catch (error) {
-      console.error("loadMessages error:", error);
-      throw error;
     }
-  },
-  searchUsers: async (searchTerm: string): Promise<searchUsersResponse> => {
-    try {
-      const { data } = await client.query<searchUsersResponse>({
-        query: queries.searchUsers,
-        variables: { username: searchTerm },
-      });
-
-      if (!data) {
-        throw new Error("No data returned from searchUsers query");
+  `,
+  sendMessage: gql`
+    mutation SendMessage($chatId: ID!, $text: String!) {
+      sendMessage(input: { chatId: $chatId, text: $text }) {
+        id
+        chatId
+        text
+        createdAt
+        sender {
+          username
+        }
       }
-
-      return data;
-    } catch (error) {
-      console.error("searchUsers error:", error);
-      throw error;
     }
-  },
-  getUserChats: async () => {
-    try {
-      const { data } = await client.query({
-        query: queries.getUserChats,
-      });
-
-      if (!data) {
-        throw new Error("No data returned from getUserChats query");
-      }
-
-      return data;
-    } catch (error) {
-      console.error("getUserChats error:", error);
-      throw error;
-    }
-  },
+  `,
 };

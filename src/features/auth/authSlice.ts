@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { User } from "./auth.types";
-
-const TOKEN_KEY = "auth_token";
+import { config } from "@/config";
 
 interface AuthState {
   token: string | null;
@@ -10,7 +9,7 @@ interface AuthState {
 }
 
 const getTokenFromStorage = (): string | null => {
-  return localStorage.getItem(TOKEN_KEY);
+  return localStorage.getItem(config.authKey);
 };
 
 const initialState: AuthState = {
@@ -26,7 +25,7 @@ const authSlice = createSlice({
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
       state.isAuthenticated = true;
-      localStorage.setItem(TOKEN_KEY, action.payload);
+      localStorage.setItem(config.authKey, action.payload);
     },
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
@@ -35,7 +34,7 @@ const authSlice = createSlice({
       state.token = null;
       state.user = null;
       state.isAuthenticated = false;
-      // localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(config.authKey);
     },
   },
 });

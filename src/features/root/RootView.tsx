@@ -1,31 +1,38 @@
-import { useEffect, useState, type FC } from "react";
-import SearchUser from "./components/search-user/SearchUser";
-import $style from "./RootView.module.css";
-import { chatService } from "@/service/chat.service";
+import { useEffect, useMemo, useState, type FC } from "react";
 import ChatList from "../chat-list/ChatList";
 import Header from "./components/header/Header";
 import Chat from "../chat/components/Chat";
-const RootView: FC = () => {
-  const [chats, setChats] = useState<string[]>([]);
+import { useQuery } from "@apollo/client/react";
+import { queries, type GetUserChatsResponse } from "@/service/chat.service";
 
-  const getUserChats = async () => {
-    try {
-      const { geChats } = await chatService.getUserChats();
-      setChats(geChats);
-    } catch (error) {
-      console.error("Failed to fetch user chats:", error);
-    }
+const RootView: FC = () => {
+  const [currentChatId, setCurrentChatId] = useState("");
+
+  const { data, error } = useQuery<GetUserChatsResponse>(queries.getUserChats);
+
+  const handleSelectChat = (id: string) => {
+    setCurrentChatId(id);
   };
 
   useEffect(() => {
-    getUserChats();
-  }, []);
+    if (error) {
+      console.error("Error fetching user chats:", error);
+    }
+  }, [error]);
+
+  const chats = useMemo(() => {
+    return data?.getChats || [];
+  }, [data]);
+
+  const currentChat = useMemo(() => {
+    return chats.find((chat) => chat.id === currentChatId);
+  }, [chats, currentChatId]);
 
   return (
     <>
       <Header />
-      <ChatList chats={chats} />
-      <Chat />
+      <ChatList chats={chats} onSelectChat={handleSelectChat} />
+      <Chat chat={currentChat} />
     </>
   );
 };

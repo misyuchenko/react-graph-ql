@@ -1,3 +1,4 @@
-export const config =  {
-  graphQlApi: 'https://chats-api.mysterygateway.ru/graphql'
-}
+export const config = {
+  graphQlApi: "https://chats-api.mysterygateway.ru/graphql",
+  authKey: "auth_token",
+};
