@@ -1,4 +1,4 @@
-import { config } from "@/config";
+import { config } from "@/shared/api/config";
 
 export const authService = {
   setToken(token: string): void {
@@ -10,7 +10,7 @@ export const authService = {
   },
 
   removeToken(): void {
-    // localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(config.authKey);
   },
 
   clear(): void {

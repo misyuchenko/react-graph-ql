@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client/react";
 import { LOGIN_MUTATION } from "@/graphql/auth.queries";
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
-import { setToken } from "./authSlice";
+import { setToken } from "../model/authSlice";
 
 const LoginView: FC = () => {
   const dispatch = useAppDispatch();
