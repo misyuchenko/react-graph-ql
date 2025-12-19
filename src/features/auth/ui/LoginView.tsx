@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
 import $style from "./LoginView.module.css";
 import { useMutation } from "@apollo/client/react";
-import { LOGIN_MUTATION } from "@/graphql/auth.queries";
+import { LOGIN_MUTATION } from "../api/queries";
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
 import { setToken } from "../model/authSlice";

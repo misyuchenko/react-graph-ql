@@ -16,6 +16,7 @@ export {
 
 // API
 export { authService } from "./api/auth.service";
+export { LOGIN_MUTATION, WHO_AM_I_QUERY } from "./api/queries";
 
 // Types
-export type { User, LoginInput, LoginResponse, WhoAmIResponse } from "./model/auth.types";
+export type { User, LoginInput, LoginResponse, WhoAmIResponse } from "./model/types";
