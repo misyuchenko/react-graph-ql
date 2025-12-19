@@ -1,12 +1,12 @@
-const TOKEN_KEY = "auth_token";
+import { config } from "@/config";
 
 export const authService = {
   setToken(token: string): void {
-    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem(config.authKey, token);
   },
 
   getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(config.authKey);
   },
 
   removeToken(): void {

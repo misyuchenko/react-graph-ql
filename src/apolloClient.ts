@@ -13,7 +13,7 @@ const httpLink = new HttpLink({
 });
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem(config.authKey);
 
   operation.setContext(({ headers = {} }) => {
     if (token) {

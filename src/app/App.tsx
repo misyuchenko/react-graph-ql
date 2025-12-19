@@ -11,30 +11,37 @@ import { setUser, clearAuth } from "@/features/auth/authSlice";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 
   const { loading, error, data } = useQuery(WHO_AM_I_QUERY, {
     skip: !isAuthenticated,
   });
 
-  useEffect(() => {
-    if (error && isAuthenticated) {
+  // useEffect(() => {
+  //   if (error && isAuthenticated) {
+  //     console.error("WhoAmI error:", error);
+  //     dispatch(clearAuth());
+  //     router.navigate("/login");
+  //     return;
+  //   }
 
-      console.error("WhoAmI error:", error);
-      dispatch(clearAuth());
-    }
-    if (data?.whoAmI) {
-      console.log("Current user:", data.whoAmI.username);
-      dispatch(setUser(data.whoAmI));
-      router.navigate("/");
-    } else if (!loading && !isAuthenticated) {
-      router.navigate("/login");
-    }
-  }, [data, error, isAuthenticated, loading, dispatch]);
+  //   if (data?.whoAmI && !user) {
+  //     console.log("Current user:", data.whoAmI.username);
+  //     dispatch(setUser(data.whoAmI));
+  //   }
 
-  if (loading && isAuthenticated) {
-    return <div>Loading...</div>;
-  }
+  //   if (!loading) {
+  //     if (isAuthenticated && data?.whoAmI) {
+  //       router.navigate("/");
+  //     } else if (!isAuthenticated) {
+  //       router.navigate("/login");
+  //     }
+  //   }
+  // }, [data, error, isAuthenticated, loading, dispatch, user]);
+
+  // if (loading && isAuthenticated) {
+  //   return <div>Loading...</div>;
+  // }
 
   return <RouterProvider router={router} />;
 };
