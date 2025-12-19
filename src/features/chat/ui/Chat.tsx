@@ -1,7 +1,7 @@
 import { useEffect, type FC } from "react";
 import $styles from "./Chat.module.css";
-import { useLazyLoadMessages, useSendMessage } from "@/service/chat.hooks";
-import type { Chat as ChatType } from "@/service/chat.service";
+import { useLazyLoadMessages, useSendMessage } from "../api/hooks";
+import type { Chat as ChatType } from "../model/types";
 import MessageInput from "./MessageInput";
 interface Props {
   chat?: ChatType;

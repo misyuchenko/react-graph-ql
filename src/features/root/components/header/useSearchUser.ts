@@ -1,30 +1,17 @@
-import { queries } from "@/service/chat.service";
-import { useLazyQuery } from "@apollo/client/react";
-
-interface SearchUsersData {
-  searchUsers: {
-    username: string;
-  }[];
-}
+import { useSearchUsers } from "@/features/chat";
 
 export const useSearchUser = () => {
-  const [searchUsers, { data, loading, error }] = useLazyQuery<SearchUsersData>(
-    queries.searchUsers,
-  );
+  const { searchUsers, users, loading, error } = useSearchUsers();
 
   const handleSearch = async (username: string) => {
     if (!username.trim()) return;
 
     try {
-      await searchUsers({
-        variables: { username },
-      });
+      await searchUsers(username);
     } catch (err) {
       console.error("Search error:", err);
     }
   };
-
-  const users = data?.searchUsers?.map((user) => user.username) || [];
 
   return {
     users,

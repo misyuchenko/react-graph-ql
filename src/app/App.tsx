@@ -7,7 +7,7 @@ import "./App.css";
 import { useQuery } from "@apollo/client/react";
 import { WHO_AM_I_QUERY } from "@/graphql/auth.queries";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import { setUser, clearAuth } from "@/features/auth/authSlice";
+import { setUser, clearAuth } from "@/features/auth";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();

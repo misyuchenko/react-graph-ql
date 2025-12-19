@@ -1,16 +1,16 @@
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client/react";
-import {
-  queries,
-  mutations,
-  type GetUserChatsResponse,
-  type LoadMessagesResponse,
-  type LoadMessagesInput,
-  type SearchUsersResponse,
-  type CreateChatResponse,
-  type CreateChatInput,
-  type SendMessageResponse,
-  type SendMessageInput,
-} from "./chat.service";
+import type {
+  GetUserChatsResponse,
+  LoadMessagesResponse,
+  LoadMessagesInput,
+  SearchUsersResponse,
+  CreateChatResponse,
+  CreateChatInput,
+  SendMessageResponse,
+  SendMessageInput,
+} from "../model/types";
+
+import { queries, mutations } from "./queries";
 
 export function useGetUserChats() {
   const { data, loading, error, refetch } = useQuery<GetUserChatsResponse>(

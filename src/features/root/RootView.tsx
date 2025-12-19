@@ -1,14 +1,11 @@
 import { useEffect, useMemo, useState, type FC } from "react";
-import ChatList from "../chat-list/ChatList";
+import { Chat, ChatList, useGetUserChats } from "@/features/chat";
 import Header from "./components/header/Header";
-import Chat from "../chat/components/Chat";
-import { useQuery } from "@apollo/client/react";
-import { queries, type GetUserChatsResponse } from "@/service/chat.service";
 
 const RootView: FC = () => {
   const [currentChatId, setCurrentChatId] = useState("");
 
-  const { data, error } = useQuery<GetUserChatsResponse>(queries.getUserChats);
+  const { chats: allChats, error } = useGetUserChats();
 
   const handleSelectChat = (id: string) => {
     setCurrentChatId(id);
@@ -20,18 +17,14 @@ const RootView: FC = () => {
     }
   }, [error]);
 
-  const chats = useMemo(() => {
-    return data?.getChats || [];
-  }, [data]);
-
   const currentChat = useMemo(() => {
-    return chats.find((chat) => chat.id === currentChatId);
-  }, [chats, currentChatId]);
+    return allChats.find((chat) => chat.id === currentChatId);
+  }, [allChats, currentChatId]);
 
   return (
     <>
       <Header />
-      <ChatList chats={chats} onSelectChat={handleSelectChat} />
+      <ChatList chats={allChats} onSelectChat={handleSelectChat} />
       <Chat chat={currentChat} />
     </>
   );
