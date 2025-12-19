@@ -1,4 +1,4 @@
-import LoginView from "@/features/auth/LoginView";
+import { LoginView } from "@/features/auth";
 import RootView from "@/features/root/RootView";
 
 const routes = [
@@ -10,6 +10,6 @@ const routes = [
     path: "/login",
     Component: LoginView,
   },
-]
+];
 
 export default routes;

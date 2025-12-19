@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from "react";
 import $style from "./SearchUser.module.css";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useCreateChat } from "@/features/chat";
 
 const SearchUser: FC<{

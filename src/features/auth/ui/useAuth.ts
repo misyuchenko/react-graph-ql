@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client/react";
-import { WHO_AM_I_QUERY } from "@/graphql/auth.queries";
+import { WHO_AM_I_QUERY } from "../api/queries";
 import { useAppSelector } from "@/app/hooks";
 
 export const useAuth = () => {
