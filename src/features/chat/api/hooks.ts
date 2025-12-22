@@ -119,9 +119,6 @@ export function useCreateChat() {
 export function useSendMessage() {
   const [sendMessage, { data, loading, error, reset }] = useMutation(
     SEND_MESSAGE_MUTATION,
-    {
-      refetchQueries: ["LoadMessages"],
-    },
   );
 
   return {
