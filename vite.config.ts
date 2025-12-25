@@ -18,6 +18,11 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
+  css: {
+    modules: {
+      localsConvention: "camelCase"
+    }
+  },
   server: {
     watch: {
       usePolling: true,
