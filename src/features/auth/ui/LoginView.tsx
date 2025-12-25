@@ -1,7 +1,6 @@
 import { type FC, useState } from "react";
 import $style from "./LoginView.module.css";
-import { useLazyQuery, useMutation } from "@apollo/client/react";
-import { LOGIN_MUTATION, WHO_AM_I_QUERY } from "../api/queries";
+import { useLoginMutation, useLazyWhoAmIQuery } from "../api/authApi";
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
 import { setToken, setUser } from "../model/authSlice";
@@ -19,25 +18,23 @@ const LoginView: FC = () => {
     setPassword(event.target.value);
   };
 
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
+  const [login, { isLoading, error }] = useLoginMutation();
 
-  const [getWhoAmI, { loading: whoAmILoading }] = useLazyQuery(WHO_AM_I_QUERY);
+  const [getWhoAmI, { isLoading: whoAmILoading }] = useLazyWhoAmIQuery();
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const result = await login({
-        variables: { username, password },
-      });
+      const result = await login({ username, password }).unwrap();
 
-      if (result.data?.signIn) {
-        dispatch(setToken(result.data.signIn.accessToken));
+      if (result.signIn) {
+        dispatch(setToken(result.signIn.accessToken));
 
-        const whoAmIResult = await getWhoAmI();
+        const whoAmIResult = await getWhoAmI().unwrap();
 
-        if (whoAmIResult.data?.whoAmI) {
-          dispatch(setUser(whoAmIResult.data.whoAmI));
+        if (whoAmIResult) {
+          dispatch(setUser(whoAmIResult));
           router.navigate("/");
         }
       }
@@ -60,7 +57,7 @@ const LoginView: FC = () => {
             name="username"
             value={username}
             onChange={handleUsernameChange}
-            disabled={loading}
+            disabled={isLoading}
           />
           <label htmlFor="password">Password:</label>
           <input
@@ -71,19 +68,19 @@ const LoginView: FC = () => {
             name="password"
             value={password}
             onChange={handlePasswordChange}
-            disabled={loading}
+            disabled={isLoading}
           />
           {error && (
             <div style={{ color: "red", marginTop: "10px" }}>
-              {error.message}
+              {"message" in error ? error.message : "Login failed"}
             </div>
           )}
           <button
             className={$style.LoginView__button}
             type="submit"
-            disabled={loading || whoAmILoading}
+            disabled={isLoading || whoAmILoading}
           >
-            {loading || whoAmILoading ? "Loading..." : "Login"}
+            {isLoading || whoAmILoading ? "Loading..." : "Login"}
           </button>
         </form>
       </div>

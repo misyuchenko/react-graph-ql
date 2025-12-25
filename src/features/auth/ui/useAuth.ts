@@ -1,5 +1,4 @@
-import { useQuery } from "@apollo/client/react";
-import { WHO_AM_I_QUERY } from "../api/queries";
+import { useWhoAmIQuery } from "../api/authApi";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setUser } from "../model/authSlice";
 import { useEffect } from "react";
@@ -10,24 +9,24 @@ export const useAuth = () => {
     (state) => state.auth,
   );
 
-  const { loading, error, data, refetch } = useQuery(WHO_AM_I_QUERY, {
+  const { data, isLoading, error, refetch } = useWhoAmIQuery(undefined, {
     skip: !hasToken,
   });
 
   useEffect(() => {
-    if (data?.whoAmI && !user) {
-      dispatch(setUser(data.whoAmI));
+    if (data && !user) {
+      dispatch(setUser(data));
     }
   }, [data, user, dispatch]);
 
-  const currentUser = user || data?.whoAmI;
+  const currentUser = user || data;
 
   const isAuthenticated = hasToken && !!currentUser;
 
-  const isLoading = hasToken && !currentUser && loading;
+  const loading = hasToken && !currentUser && isLoading;
 
   return {
-    loading: isLoading,
+    loading,
     error,
     user: currentUser,
     isAuthenticated,
