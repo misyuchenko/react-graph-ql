@@ -1,18 +1,18 @@
-import { useQuery, useLazyQuery, useMutation } from "@apollo/client/react";
 import {
-  GET_USER_CHATS_QUERY,
-  LOAD_MESSAGES_QUERY,
-  SEARCH_USERS_QUERY,
-  CREATE_CHAT_MUTATION,
-  SEND_MESSAGE_MUTATION,
-} from "./queries";
+  useGetUserChatsQuery,
+  useLoadMessagesQuery,
+  useLazyLoadMessagesQuery,
+  useLazySearchUsersQuery,
+  useCreateChatMutation,
+  useSendMessageMutation,
+} from "./chatApi";
 
 export function useGetUserChats() {
-  const { data, loading, error, refetch } = useQuery(GET_USER_CHATS_QUERY);
+  const { data, isLoading, error, refetch } = useGetUserChatsQuery();
 
   return {
-    chats: data?.getChats || [],
-    loading,
+    chats: data || [],
+    loading: isLoading,
     error,
     refetch,
   };
@@ -24,29 +24,23 @@ export function useLoadMessages(
     cursor?: string;
   },
 ) {
-  const { data, loading, error, fetchMore, refetch } = useQuery(
-    LOAD_MESSAGES_QUERY,
+  const { data, isLoading, error, refetch } = useLoadMessagesQuery(
     {
-      variables: {
-        chatId,
-        cursor: options?.cursor,
-      },
-      skip: !chatId,
+      chatId,
+      cursor: options?.cursor,
     },
+    {
+      skip: !chatId,
+    }
   );
 
-  const loadMoreMessages = (cursor: string) => {
-    return fetchMore({
-      variables: {
-        chatId,
-        cursor,
-      },
-    });
+  const loadMoreMessages = () => {
+    return refetch();
   };
 
   return {
-    messages: data?.loadMessages || [],
-    loading,
+    messages: data || [],
+    loading: isLoading,
     error,
     loadMoreMessages,
     refetch,
@@ -54,8 +48,7 @@ export function useLoadMessages(
 }
 
 export function useLazyLoadMessages() {
-  const [loadMessages, { data, loading, error, fetchMore }] =
-    useLazyQuery(LOAD_MESSAGES_QUERY);
+  const [trigger, { data, isLoading, error }] = useLazyLoadMessagesQuery();
 
   const load = (
     chatId: string,
@@ -63,69 +56,55 @@ export function useLazyLoadMessages() {
       cursor?: string;
     },
   ) => {
-    return loadMessages({
-      variables: {
-        chatId,
-        cursor: options?.cursor,
-      },
+    return trigger({
+      chatId,
+      cursor: options?.cursor,
     });
   };
 
   const loadMore = (chatId: string, cursor: string) => {
-    return fetchMore({
-      variables: {
-        chatId,
-        cursor,
-      },
-    });
+    return trigger({ chatId, cursor });
   };
 
   return {
     loadMessages: load,
-    messages: data?.loadMessages || [],
-    loading,
+    messages: data || [],
+    loading: isLoading,
     error,
     loadMore,
   };
 }
 
 export function useSearchUsers() {
-  const [searchUsers, { data, loading, error }] =
-    useLazyQuery(SEARCH_USERS_QUERY);
+  const [trigger, { data, isLoading, error }] = useLazySearchUsersQuery();
 
   return {
-    searchUsers: (username: string) => searchUsers({ variables: { username } }),
-    users: data?.searchUsers || [],
-    loading,
+    searchUsers: (username: string) => trigger(username),
+    users: data || [],
+    loading: isLoading,
     error,
   };
 }
 
 export function useCreateChat() {
-  const [createChat, { data, loading, error }] = useMutation(
-    CREATE_CHAT_MUTATION,
-    {
-      refetchQueries: ["GetUserChats"],
-    },
-  );
+  const [createChatMutation, { data, isLoading, error }] = useCreateChatMutation();
 
   return {
-    createChat: (username: string) => createChat({ variables: { username } }),
-    chat: data?.createChat,
-    loading,
+    createChat: (username: string) => createChatMutation(username),
+    chat: data,
+    loading: isLoading,
     error,
   };
 }
+
 export function useSendMessage() {
-  const [sendMessage, { data, loading, error, reset }] = useMutation(
-    SEND_MESSAGE_MUTATION,
-  );
+  const [sendMessageMutation, { data, isLoading, error, reset }] = useSendMessageMutation();
 
   return {
     sendMessage: (chatId: string, text: string) =>
-      sendMessage({ variables: { chatId, text } }),
-    message: data?.sendMessage,
-    loading,
+      sendMessageMutation({ chatId, text }),
+    message: data,
+    loading: isLoading,
     error,
     reset,
   };
