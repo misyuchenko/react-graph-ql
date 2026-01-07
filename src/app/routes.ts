@@ -1,5 +1,5 @@
-import LoginView from "@/views/login/LoginView";
-import RootView from "@/views/root/RootView";
+import LoginView from "@/features/auth/LoginView";
+import RootView from "@/features/root/RootView";
 
 const routes = [
   {
