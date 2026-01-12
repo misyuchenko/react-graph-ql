@@ -1,15 +1,16 @@
-import LoginView from "@/features/auth/LoginView";
+import { LoginView } from "@/features/auth";
 import RootView from "@/features/root/RootView";
+import ProtectedRoute from "./ProtectedRoute";
 
 const routes = [
   {
     path: "/",
-    Component: RootView,
+    element: <ProtectedRoute><RootView /></ProtectedRoute>,
   },
   {
     path: "/login",
     Component: LoginView,
   },
-]
+];
 
 export default routes;

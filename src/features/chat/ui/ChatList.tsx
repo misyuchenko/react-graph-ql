@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import $styles from "./ChatList.module.css";
-import type { Chat } from "@/service/chat.service";
+import type { Chat } from "../model/types";
 
 interface ChatListProps {
   chats?: Chat[];

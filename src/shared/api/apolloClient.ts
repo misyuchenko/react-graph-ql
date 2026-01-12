@@ -4,18 +4,18 @@ import {
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { config } from "@/config";
 
-const URL = config.graphQlApi;
+import { authService } from "@/features/auth";
+import { config } from "./config";
 
 const httpLink = new HttpLink({
-  uri: URL,
+  uri: config.graphQlApi,
 });
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem(config.authKey);
+  const token = authService.getToken();
 
-  operation.setContext(({ headers = {} }) => {
+  operation.setContext(({ headers = {} }: { headers?: Record<string, string> }) => {
     if (token) {
       return {
         headers: {

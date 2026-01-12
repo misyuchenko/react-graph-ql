@@ -1,10 +1,10 @@
 import { type FC, useState } from "react";
 import $style from "./LoginView.module.css";
-import { useMutation } from "@apollo/client/react";
-import { LOGIN_MUTATION } from "@/graphql/auth.queries";
+import { useLazyQuery, useMutation } from "@apollo/client/react";
+import { LOGIN_MUTATION, WHO_AM_I_QUERY } from "../api/queries";
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
-import { setToken } from "./authSlice";
+import { setToken, setUser } from "../model/authSlice";
 
 const LoginView: FC = () => {
   const dispatch = useAppDispatch();
@@ -19,9 +19,9 @@ const LoginView: FC = () => {
     setPassword(event.target.value);
   };
 
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
-    refetchQueries: ["WhoAmI"],
-  });
+  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
+
+  const [getWhoAmI, { loading: whoAmILoading }] = useLazyQuery(WHO_AM_I_QUERY);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +33,13 @@ const LoginView: FC = () => {
 
       if (result.data?.signIn) {
         dispatch(setToken(result.data.signIn.accessToken));
-        router.navigate("/");
+
+        const whoAmIResult = await getWhoAmI();
+
+        if (whoAmIResult.data?.whoAmI) {
+          dispatch(setUser(whoAmIResult.data.whoAmI));
+          router.navigate("/");
+        }
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -75,9 +81,9 @@ const LoginView: FC = () => {
           <button
             className={$style.LoginView__button}
             type="submit"
-            disabled={loading}
+            disabled={loading || whoAmILoading}
           >
-            {loading ? "Loading..." : "Login"}
+            {loading || whoAmILoading ? "Loading..." : "Login"}
           </button>
         </form>
       </div>
