@@ -72,8 +72,8 @@ const Chat: FC<Props> = ({ chat }) => {
       const result = await sendMessage(chat.id, text);
 
       // Добавляем отправленное сообщение в список, если оно вернулось из mutation
-      if (result.data?.sendMessage) {
-        const newMessage = result.data.sendMessage;
+      if (result.data) {
+        const newMessage = result.data;
 
         // Добавляем в realtimeMessages если его еще нет
         setRealtimeMessages((prev) => {

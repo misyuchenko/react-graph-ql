@@ -12,14 +12,17 @@ export {
   useSendMessage,
 } from "./api/hooks";
 
-// Queries & Mutations
+// RTK Query hooks
 export {
-  GET_USER_CHATS_QUERY,
-  LOAD_MESSAGES_QUERY,
-  SEARCH_USERS_QUERY,
-  CREATE_CHAT_MUTATION,
-  SEND_MESSAGE_MUTATION,
-} from "./api/queries";
+  useGetUserChatsQuery,
+  useLazyGetUserChatsQuery,
+  useLoadMessagesQuery,
+  useLazyLoadMessagesQuery,
+  useSearchUsersQuery,
+  useLazySearchUsersQuery,
+  useCreateChatMutation,
+  useSendMessageMutation,
+} from "./api/chatApi";
 
 // Types
 export type { Chat as ChatType, Message } from "./model/types";

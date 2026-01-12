@@ -11,7 +11,7 @@ export {
 } from "./model/authSelectors";
 
 export { authService } from "./api/auth.service";
-export { LOGIN_MUTATION, WHO_AM_I_QUERY } from "./api/queries";
+export { useLoginMutation, useWhoAmIQuery, useLazyWhoAmIQuery } from "./api/authApi";
 
 export type {
   User,
