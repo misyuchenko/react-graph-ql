@@ -1,6 +1,6 @@
-import { useWhoAmIQuery } from "../api/authApi";
+import { useWhoAmIQuery } from "../../features/auth/api/authApi";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { setUser } from "../model/authSlice";
+import { setUser } from "../../features/auth/model/authSlice";
 import { useEffect } from "react";
 
 export const useAuth = () => {

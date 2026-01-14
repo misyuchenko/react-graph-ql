@@ -1,9 +1,12 @@
 import { type FC, useState } from "react";
 import $style from "./LoginView.module.css";
-import { useLoginMutation, useLazyWhoAmIQuery } from "../api/authApi";
+import {
+  useLoginMutation,
+  useLazyWhoAmIQuery,
+} from "../../features/auth/api/authApi";
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
-import { setToken, setUser } from "../model/authSlice";
+import { setToken, setUser } from "../../features/auth/model/authSlice";
 
 const LoginView: FC = () => {
   const dispatch = useAppDispatch();

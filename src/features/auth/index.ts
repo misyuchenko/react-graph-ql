@@ -1,6 +1,6 @@
-export { default as LoginView } from "./ui/LoginView";
+export { default as LoginView } from "../../pages/login/LoginView";
 
-export { useAuth } from "./ui/useAuth";
+export { useAuth } from "../../pages/login/useAuth";
 
 export { default as authReducer } from "./model/authSlice";
 export { setToken, setUser, clearAuth } from "./model/authSlice";

@@ -1,16 +1,18 @@
-import { useEffect, useState, type FC } from "react";
-import $styles from "./Chat.module.css";
+import { joinChat, leaveChat, offNewMessage, onNewMessage } from "@/app/socket";
+import { useSocket } from "@/shared/hooks/useSocket";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { useLazyLoadMessages, useSendMessage } from "../api/hooks";
 import type { Chat as ChatType, Message } from "../model/types";
+import $styles from "./Chat.module.css";
+import { useAuth } from "@/features/auth";
 import MessageInput from "./MessageInput";
-import { useSocket } from "@/shared/hooks/useSocket";
-import { joinChat, leaveChat, onNewMessage, offNewMessage } from "@/app/socket";
-
+import cn from "@/shared/cn";
 interface Props {
   chat?: ChatType;
 }
 
 const Chat: FC<Props> = ({ chat }) => {
+  const { user } = useAuth();
   const {
     loadMessages,
     messages: initialMessages,
@@ -20,32 +22,24 @@ const Chat: FC<Props> = ({ chat }) => {
   const { sendMessage } = useSendMessage();
   const [realtimeMessages, setRealtimeMessages] = useState<Message[]>([]);
 
-  // Подключаемся к WebSocket
   useSocket();
 
-  // Объединяем исторические сообщения и сообщения в реальном времени
   const messages = [...initialMessages, ...realtimeMessages];
 
-  // Загружаем историю сообщений и подключаемся к чату через WebSocket
   useEffect(() => {
     if (!chat?.id) {
       setRealtimeMessages([]);
       return;
     }
 
-    // Загружаем исторические сообщения через GraphQL
     loadMessages(chat.id);
 
-    // Присоединяемся к чату через WebSocket
     joinChat(chat.id);
     console.log(chat.id);
 
-    // Обработчик новых сообщений в реальном времени
     const handleNewMessage = (message: Message) => {
-      // Добавляем только сообщения текущего чата
       if (message.chatId === chat.id) {
         setRealtimeMessages((prev) => {
-          // Проверяем, не дублируется ли сообщение
           const isDuplicate = prev.some((msg) => msg.id === message.id);
           if (isDuplicate) return prev;
           return [...prev, message];
@@ -53,10 +47,8 @@ const Chat: FC<Props> = ({ chat }) => {
       }
     };
 
-    // Подписываемся на новые сообщения
     onNewMessage(handleNewMessage);
 
-    // Очистка при смене чата или размонтировании
     return () => {
       offNewMessage(handleNewMessage);
       leaveChat(chat.id);
@@ -68,14 +60,11 @@ const Chat: FC<Props> = ({ chat }) => {
     if (!chat) return;
 
     try {
-      // Отправляем сообщение через GraphQL
       const result = await sendMessage(chat.id, text);
 
-      // Добавляем отправленное сообщение в список, если оно вернулось из mutation
       if (result.data) {
         const newMessage = result.data;
 
-        // Добавляем в realtimeMessages если его еще нет
         setRealtimeMessages((prev) => {
           const isDuplicate =
             prev.some((msg) => msg.id === newMessage.id) ||
@@ -90,11 +79,21 @@ const Chat: FC<Props> = ({ chat }) => {
     }
   };
 
+  const sortedMessages = useMemo(() => {
+    return messages.map((msg) => ({
+      ...msg,
+      isOwn: msg.sender.username === user?.username,
+    }));
+  }, [messages, user, chat]);
+
   return (
     <div className={$styles.Chat}>
       <h1>
         {chat
-          ? `Chat with ${chat.participants[0].username}`
+          ? `Chat with ${chat.participants
+              .filter((p) => p.username !== user?.username)
+              .map((p) => p.username)
+              .join(", ")}`
           : "No chat selected."}
       </h1>
       {realtimeMessages.length === 0 &&
@@ -102,11 +101,16 @@ const Chat: FC<Props> = ({ chat }) => {
         !loading && <p>No messages yet. Start the conversation!</p>}
       {loading && <p>Loading messages...</p>}
       {error && <p className={$styles.Chat__error}>Error: {error.message}</p>}
-      {messages.length > 0 && (
+      {sortedMessages.length > 0 && (
         <ul className={$styles.Chat__messagesList}>
-          {messages.map((msg) => (
-            <li key={msg.id}>
-              <strong>{msg.sender.username}:</strong> {msg.text}
+          {sortedMessages.map((msg) => (
+            <li
+              key={msg.id}
+              className={cn($styles.message, { [$styles.isOwn]: msg.isOwn })}
+            >
+              {!msg.isOwn && <strong>{msg.sender.username}:</strong>}
+
+              {msg.text}
             </li>
           ))}
         </ul>

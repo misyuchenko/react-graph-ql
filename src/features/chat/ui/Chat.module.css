@@ -1,5 +1,4 @@
 .Chat {
-  flex-grow: 0.7;
   border: 2px solid black;
   padding: 10px;
   grid-area: chat;
@@ -8,4 +7,24 @@
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
+}
+
+.Chat__messagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.message {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: fit-content;
+  background-color: aqua;
+}
+
+.isOwn {
+  align-self: end;
+  background-color: bisque;
 }
