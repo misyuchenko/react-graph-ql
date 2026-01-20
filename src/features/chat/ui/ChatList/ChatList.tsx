@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { Chat } from "../model/types";
+import type { Chat } from "../../model/types";
 import $styles from "./ChatList.module.css";
 import { useAuth } from "@/features/auth";
 

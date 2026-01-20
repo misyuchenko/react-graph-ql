@@ -8,7 +8,7 @@ import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
 import { setToken, setUser } from "../../features/auth/model/authSlice";
 
-import Input from "@/shared/ui/Input";
+import Input from "@/shared/ui/Input/Input";
 
 const LoginPage: FC = () => {
   const dispatch = useAppDispatch();

@@ -1,11 +1,11 @@
 import { joinChat, leaveChat, offNewMessage, onNewMessage } from "@/app/socket";
 import { useSocket } from "@/shared/hooks/useSocket";
 import { useEffect, useMemo, useState, type FC } from "react";
-import { useLazyLoadMessages, useSendMessage } from "../api/hooks";
-import type { Chat as ChatType, Message } from "../model/types";
+import { useLazyLoadMessages, useSendMessage } from "../../api/hooks";
+import type { Chat as ChatType, Message } from "../../model/types";
 import $styles from "./Chat.module.css";
 import { useAuth } from "@/features/auth";
-import MessageInput from "./MessageInput";
+import MessageInput from "../MessageInput/MessageInput";
 import { cn } from "@/shared/utils";
 interface Props {
   chat?: ChatType;

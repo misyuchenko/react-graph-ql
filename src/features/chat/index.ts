@@ -1,5 +1,5 @@
-export { default as Chat } from "./ui/Chat";
-export { default as ChatList } from "./ui/ChatList";
+export { default as Chat } from "./ui/Chat/Chat";
+export { default as ChatList } from "./ui/ChatList/ChatList";
 
 export {
   useGetUserChats,
