@@ -1,11 +1,12 @@
-/* .LoginPage {
+@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+
+.LoginPage {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 32px;
-  height: 100vh;
-  width: 100vw;
+  font-family: "Sora", sans-serif;
 }
 
 .LoginPage__form {
@@ -15,13 +16,7 @@
   justify-content: center;
   width: 100%;
   max-width: 400px;
-}
-
-.LoginPage__input {
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  gap: 16px;
 }
 
 .LoginPage__button {
@@ -45,4 +40,4 @@
 .LoginPage__title {
   font-size: 2rem;
   font-weight: bold;
-} */
+}

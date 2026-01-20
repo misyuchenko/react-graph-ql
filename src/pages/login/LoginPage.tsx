@@ -7,7 +7,8 @@ import {
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
 import { setToken, setUser } from "../../features/auth/model/authSlice";
-import PasswordInput from "@/shared/ui/PasswordInput";
+
+import Input from "@/shared/ui/Input";
 
 const LoginPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -52,33 +53,22 @@ const LoginPage: FC = () => {
       <div className={c.LoginPage}>
         <h1 className={c.LoginPage__title}>Login</h1>
         <form className={c.LoginPage__form} onSubmit={handleLogin}>
-          <label htmlFor="username">Username:</label>
-          <input
-            className={c.LoginPage__input}
-            placeholder="login"
+          <Input
+            label="Username"
+            placeholder="Enter your username"
             type="text"
-            id="username"
             name="username"
             value={username}
             onChange={handleUsernameChange}
             disabled={isLoading}
           />
-          <label htmlFor="password">Password:</label>
-          {/* <input
-            className={c.LoginPage__input}
-            placeholder="password"
+
+          <Input
+            label="Password"
+            withPasswordToggle={true}
+            placeholder="Enter your password"
+            name="password"
             type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-            disabled={isLoading}
-          /> */}
-          <PasswordInput
-            className={c.LoginPage__input}
-            placeholder="password"
-            id="password"
-            name="password"
             value={password}
             onChange={handlePasswordChange}
             disabled={isLoading}

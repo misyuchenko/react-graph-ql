@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { GraphQLClient } from "graphql-request";
 import { config } from "./config";
-import { authService } from "@/features/auth";
+import { authService } from "@/features/auth/api/auth.service";
 
 const createGraphQLClient = () => {
   const token = authService.getToken();
