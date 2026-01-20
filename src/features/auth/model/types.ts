@@ -1,6 +1,6 @@
-export interface User {
-  username: string;
-}
+import type { User } from '@/entities/user';
+
+export type { User };
 
 export interface LoginInput {
   username: string;

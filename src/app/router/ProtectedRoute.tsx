@@ -1,12 +1,12 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/features/auth";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 
-interface ProtectedRouteProps {
+interface Props {
   children: ReactNode;
 }
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ children }: Props) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {

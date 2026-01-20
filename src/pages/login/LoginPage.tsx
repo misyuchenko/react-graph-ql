@@ -1,5 +1,5 @@
 import { type FC, useState } from "react";
-import $style from "./LoginView.module.css";
+import c from "./LoginPage.module.css";
 import {
   useLoginMutation,
   useLazyWhoAmIQuery,
@@ -7,8 +7,9 @@ import {
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
 import { setToken, setUser } from "../../features/auth/model/authSlice";
+import PasswordInput from "@/shared/ui/PasswordInput";
 
-const LoginView: FC = () => {
+const LoginPage: FC = () => {
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -48,12 +49,12 @@ const LoginView: FC = () => {
 
   return (
     <>
-      <div className={$style.LoginView}>
-        <h1 className={$style.LoginView__title}>Login</h1>
-        <form className={$style.LoginView__form} onSubmit={handleLogin}>
+      <div className={c.LoginPage}>
+        <h1 className={c.LoginPage__title}>Login</h1>
+        <form className={c.LoginPage__form} onSubmit={handleLogin}>
           <label htmlFor="username">Username:</label>
           <input
-            className={$style.LoginView__input}
+            className={c.LoginPage__input}
             placeholder="login"
             type="text"
             id="username"
@@ -63,10 +64,19 @@ const LoginView: FC = () => {
             disabled={isLoading}
           />
           <label htmlFor="password">Password:</label>
-          <input
-            className={$style.LoginView__input}
+          {/* <input
+            className={c.LoginPage__input}
             placeholder="password"
             type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+            disabled={isLoading}
+          /> */}
+          <PasswordInput
+            className={c.LoginPage__input}
+            placeholder="password"
             id="password"
             name="password"
             value={password}
@@ -79,7 +89,7 @@ const LoginView: FC = () => {
             </div>
           )}
           <button
-            className={$style.LoginView__button}
+            className={c.LoginPage__button}
             type="submit"
             disabled={isLoading || whoAmILoading}
           >
@@ -91,4 +101,4 @@ const LoginView: FC = () => {
   );
 };
 
-export default LoginView;
+export default LoginPage;

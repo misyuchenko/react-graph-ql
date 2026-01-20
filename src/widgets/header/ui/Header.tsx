@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import $styles from "./Header.module.css";
-import SearchUser from "../search-user/SearchUser";
-import { useSearchUser } from "./useSearchUser";
+import styles from "./Header.module.css";
+import SearchUser from "./SearchUser";
+import { useSearchUser } from "../model/useSearchUser";
 
 const Header: FC = () => {
   const { users, loading, handleSearch } = useSearchUser();
@@ -10,9 +10,8 @@ const Header: FC = () => {
     await handleSearch(searchTerm);
   };
 
-
   return (
-    <header className={$styles.Header}>
+    <header className={styles.Header}>
       <SearchUser users={users} onSearchUsers={handleSearchUsers} loading={loading} />
     </header>
   );

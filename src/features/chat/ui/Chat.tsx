@@ -6,7 +6,7 @@ import type { Chat as ChatType, Message } from "../model/types";
 import $styles from "./Chat.module.css";
 import { useAuth } from "@/features/auth";
 import MessageInput from "./MessageInput";
-import cn from "@/shared/cn";
+import { cn } from "@/shared/utils";
 interface Props {
   chat?: ChatType;
 }

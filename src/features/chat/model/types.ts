@@ -1,16 +1,12 @@
+import type { Chat } from '@/entities/chat';
+import type { Message } from '@/entities/message';
+import type { User } from '@/entities/user';
+
+export type { Chat, Message };
+
 export interface LoadMessagesInput {
   chatId: string;
   cursor?: string;
-}
-
-export interface Message {
-  id: string;
-  chatId: string;
-  sender: {
-    username: string;
-  };
-  text: string;
-  createdAt: string;
 }
 
 export interface LoadMessagesResponse {
@@ -18,18 +14,7 @@ export interface LoadMessagesResponse {
 }
 
 export interface SearchUsersResponse {
-  searchUsers: {
-    username: string;
-  }[];
-}
-
-export interface Chat {
-  id: string;
-  title: string;
-  createdAt: string;
-  participants: {
-    username: string;
-  }[];
+  searchUsers: User[];
 }
 
 export interface GetUserChatsResponse {

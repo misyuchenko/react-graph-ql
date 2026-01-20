@@ -1,10 +1,8 @@
 import { useEffect, useMemo, useState, type FC } from "react";
 import { Chat, ChatList, useGetUserChats } from "@/features/chat";
-import Header from "./components/header/Header";
 
-const RootView: FC = () => {
+const RootPage: FC = () => {
   const [currentChatId, setCurrentChatId] = useState("");
-
   const { chats: allChats, error } = useGetUserChats();
 
   const handleSelectChat = (id: string) => {
@@ -23,11 +21,10 @@ const RootView: FC = () => {
 
   return (
     <>
-      <Header />
       <ChatList chats={allChats} onSelectChat={handleSelectChat} />
       <Chat chat={currentChat} />
     </>
   );
 };
 
-export default RootView;
+export default RootPage;

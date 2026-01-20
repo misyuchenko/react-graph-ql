@@ -1,6 +1,4 @@
-export { default as LoginView } from "../../pages/login/LoginView";
-
-export { useAuth } from "../../pages/login/useAuth";
+export { useAuth } from "./hooks/useAuth";
 
 export { default as authReducer } from "./model/authSlice";
 export { setToken, setUser, clearAuth } from "./model/authSlice";
@@ -11,7 +9,11 @@ export {
 } from "./model/authSelectors";
 
 export { authService } from "./api/auth.service";
-export { useLoginMutation, useWhoAmIQuery, useLazyWhoAmIQuery } from "./api/authApi";
+export {
+  useLoginMutation,
+  useWhoAmIQuery,
+  useLazyWhoAmIQuery,
+} from "./api/authApi";
 
 export type {
   User,
