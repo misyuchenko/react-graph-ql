@@ -2,7 +2,7 @@ import type { FC } from "react";
 import type { Chat } from "@/entities/chat";
 import $styles from "./ChatList.module.css";
 import { useAuth } from "@/features/auth";
-import ChatListItem from "./ui/ChatListItem/ChatListItem";
+import ChatListItem from "../ChatListItem/ChatListItem";
 
 interface ChatListProps {
   chats: Chat[];

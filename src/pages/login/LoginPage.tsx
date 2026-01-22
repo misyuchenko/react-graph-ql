@@ -1,9 +1,9 @@
 import { type FC, useState } from "react";
 import c from "./LoginPage.module.css";
 import {
-  useLoginMutation,
+  useSignInMutation,
   useLazyWhoAmIQuery,
-} from "../../features/auth/api/authApi";
+} from "@/shared/api/generated/enhanced-api";
 import router from "@/app/router";
 import { useAppDispatch } from "@/app/hooks";
 import { setToken, setUser } from "../../features/auth/model/authSlice";
@@ -23,7 +23,7 @@ const LoginPage: FC = () => {
     setPassword(event.target.value);
   };
 
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [signIn, { isLoading, error }] = useSignInMutation();
 
   const [getWhoAmI, { isLoading: whoAmILoading }] = useLazyWhoAmIQuery();
 
@@ -31,7 +31,7 @@ const LoginPage: FC = () => {
     event.preventDefault();
 
     try {
-      const result = await login({ username, password }).unwrap();
+      const result = await signIn({ input: { username, password } }).unwrap();
 
       if (result.signIn) {
         dispatch(setToken(result.signIn.accessToken));

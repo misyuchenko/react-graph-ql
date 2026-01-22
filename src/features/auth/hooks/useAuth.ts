@@ -1,4 +1,4 @@
-import { useWhoAmIQuery } from "../api/authApi";
+import { useWhoAmIQuery } from "@/shared/api/generated/enhanced-api";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setUser } from "../model/authSlice";
 import { useEffect } from "react";

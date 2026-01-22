@@ -1,8 +1,1 @@
-import type { User } from '@/entities/user';
-
-export interface Chat {
-  id: string;
-  title: string;
-  createdAt: string;
-  participants: User[];
-}
+export type { ChatSummary as Chat } from "@/shared/api/generated/graphql";

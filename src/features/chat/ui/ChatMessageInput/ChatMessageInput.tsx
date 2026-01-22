@@ -1,11 +1,11 @@
 import { useState, type FC } from "react";
-import $styles from "./MessageInput.module.css";
-
+import $styles from "./ChatMessageInput.module.css";
+import Button from "@/shared/ui/Button/Button";
 interface Props {
   onSendMessage: (text: string) => void;
 }
 
-const MessageInput: FC<Props> = ({ onSendMessage }) => {
+const ChatMessageInput: FC<Props> = ({ onSendMessage }) => {
   const [text, setText] = useState("");
 
   const handleSendClick = () => {
@@ -22,19 +22,20 @@ const MessageInput: FC<Props> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className={$styles.MessageInput}>
+    <div className={$styles.ChatMessageInput}>
       <input
+        className={$styles.input}
         type="text"
         placeholder="Type your message..."
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleSendClick} disabled={!text.trim()}>
+      <Button onClick={handleSendClick} disabled={!text.trim()}>
         Send
-      </button>
+      </Button>
     </div>
   );
 };
 
-export default MessageInput;
+export default ChatMessageInput;

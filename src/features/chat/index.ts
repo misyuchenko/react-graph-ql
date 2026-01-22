@@ -11,14 +11,14 @@ export {
 } from "./api/hooks";
 
 export {
-  useGetUserChatsQuery,
-  useLazyGetUserChatsQuery,
+  useGetChatsQuery,
+  useLazyGetChatsQuery,
   useLoadMessagesQuery,
   useLazyLoadMessagesQuery,
   useSearchUsersQuery,
   useLazySearchUsersQuery,
   useCreateChatMutation,
   useSendMessageMutation,
-} from "./api/chatApi";
+} from "@/shared/api/generated/enhanced-api";
 
 export type { Chat as ChatType, Message } from "./model/types";

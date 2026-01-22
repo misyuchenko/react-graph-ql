@@ -3,6 +3,7 @@
   grid-area: list;
   background-color: var(--background-color);
   border-radius: var(--border-radius-md);
+  height: fit-content;
 }
 
 .list {

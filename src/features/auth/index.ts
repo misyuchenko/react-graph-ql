@@ -10,10 +10,10 @@ export {
 
 export { authService } from "./api/auth.service";
 export {
-  useLoginMutation,
+  useSignInMutation,
   useWhoAmIQuery,
   useLazyWhoAmIQuery,
-} from "./api/authApi";
+} from "@/shared/api/generated/enhanced-api";
 
 export type {
   User,

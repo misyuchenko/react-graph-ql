@@ -5,8 +5,9 @@ import { useLazyLoadMessages, useSendMessage } from "../../api/hooks";
 import type { Chat as ChatType, Message } from "../../model/types";
 import $styles from "./Chat.module.css";
 import { useAuth } from "@/features/auth";
-import MessageInput from "../MessageInput/MessageInput";
+import ChatMessageInput from "../ChatMessageInput/ChatMessageInput";
 import { cn } from "@/shared/utils";
+import ChatHeader from "../ChatHeader/ChatHeader";
 interface Props {
   chat?: ChatType;
 }
@@ -86,16 +87,19 @@ const Chat: FC<Props> = ({ chat }) => {
     }));
   }, [messages, user, chat]);
 
+  const chatWith = useMemo(() => {
+    if (!chat) return "";
+
+    return chat.participants
+      .filter((p) => p.username !== user?.username)
+      .map((p) => p.username)
+      .join(", ");
+  }, [chat, user]);
+
   return (
     <div className={$styles.Chat}>
-      <h1>
-        {chat
-          ? `Chat with ${chat.participants
-              .filter((p) => p.username !== user?.username)
-              .map((p) => p.username)
-              .join(", ")}`
-          : "No chat selected."}
-      </h1>
+      <ChatHeader chatWith={chatWith} />
+
       {realtimeMessages.length === 0 &&
         initialMessages.length === 0 &&
         !loading && <p>No messages yet. Start the conversation!</p>}
@@ -115,7 +119,7 @@ const Chat: FC<Props> = ({ chat }) => {
           ))}
         </ul>
       )}
-      {chat && <MessageInput onSendMessage={handleSendMessage} />}
+      {chat && <ChatMessageInput onSendMessage={handleSendMessage} />}
     </div>
   );
 };
