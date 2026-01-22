@@ -1,5 +1,5 @@
-import type { Chat } from "@/entities/chat";
-import type { User } from "@/entities/user";
+import type { Chat } from "@/entities";
+import type { User } from "@/entities";
 import style from "./ChatListItem.module.css";
 
 interface Props {
