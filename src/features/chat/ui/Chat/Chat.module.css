@@ -1,12 +1,12 @@
 .Chat {
-  border: 2px solid black;
   padding: 10px;
   grid-area: chat;
-
   display: flex;
   flex-direction: column;
   gap: 10px;
   justify-content: space-between;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius-md);
 }
 
 .Chat__messagesList {

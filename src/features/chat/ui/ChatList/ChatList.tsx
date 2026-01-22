@@ -1,7 +1,8 @@
 import type { FC } from "react";
-import type { Chat } from "../../model/types";
+import type { Chat } from "@/entities/chat";
 import $styles from "./ChatList.module.css";
 import { useAuth } from "@/features/auth";
+import ChatListItem from "./ui/ChatListItem/ChatListItem";
 
 interface ChatListProps {
   chats: Chat[];
@@ -17,15 +18,11 @@ const ChatList: FC<ChatListProps> = ({ chats, onSelectChat }) => {
         <ul className={$styles.list}>
           {chats.map((chat) => (
             <li className={$styles.list__item} key={chat.id}>
-              <div>
-                {chat.title && <strong>{chat.title}</strong>}
-                <p onClick={() => onSelectChat(chat.id)}>
-                  {chat.participants
-                    .map((p) => p.username)
-                    .filter((p) => p !== user?.username)
-                    .join(", ")}
-                </p>
-              </div>
+              <ChatListItem
+                chat={chat}
+                onSelectChat={onSelectChat}
+                user={user!}
+              />
             </li>
           ))}
         </ul>

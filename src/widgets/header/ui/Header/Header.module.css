@@ -1,8 +1,10 @@
 .Header {
   display: flex;
-  border: 2px solid black;
   grid-area: header;
   padding: 10px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: var(--border-radius-md);
 }
 
 .userControls {
@@ -10,4 +12,14 @@
   align-items: center;
   margin-left: auto;
   gap: 10px;
+}
+
+.logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: var(--color-red-300);
 }

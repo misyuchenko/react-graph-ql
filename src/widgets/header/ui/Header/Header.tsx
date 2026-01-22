@@ -5,7 +5,6 @@ import Avatar from "@/shared/ui/Avatar/Avatar";
 import { useAuth } from "@/features/auth";
 import { ExitIcon } from "@radix-ui/react-icons";
 
-
 const Header: React.FC = () => {
   const { user } = useAuth();
   // const { users, loading, handleSearch } = useSearchUser();
@@ -23,7 +22,7 @@ const Header: React.FC = () => {
       <section className={styles.userControls}>
         <Avatar />
         {user && <strong>{user.username}</strong>}
-        <button onClick={handleLogout}>
+        <button type="button" className={styles.logout} onClick={handleLogout}>
           <ExitIcon />
         </button>
       </section>
