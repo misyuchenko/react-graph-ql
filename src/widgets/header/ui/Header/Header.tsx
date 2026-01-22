@@ -4,6 +4,8 @@ import styles from "./Header.module.css";
 import Avatar from "@/shared/ui/Avatar/Avatar";
 import { useAuth } from "@/features/auth";
 import { ExitIcon } from "@radix-ui/react-icons";
+
+
 const Header: React.FC = () => {
   const { user } = useAuth();
   // const { users, loading, handleSearch } = useSearchUser();

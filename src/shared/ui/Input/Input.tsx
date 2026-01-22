@@ -1,4 +1,4 @@
-import { forwardRef, type InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes, Ref } from "react";
 import { unstable_PasswordToggleField as PasswordToggleField } from "radix-ui";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import style from "./Input.module.css";
@@ -8,12 +8,12 @@ interface CustomInputProps {
   error?: string;
   label?: string;
   withPasswordToggle?: boolean;
+  ref?: Ref<HTMLInputElement>;
 }
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & CustomInputProps;
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, label, className, withPasswordToggle, type, ...props }, ref) => {
+const Input = ({ error, label, className, withPasswordToggle, type, ref, ...props }: InputProps) => {
     const isPasswordWithToggle = type === "password" && withPasswordToggle;
 
     if (isPasswordWithToggle) {
@@ -82,9 +82,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {error && <span className={style.error}>{error}</span>}
       </div>
     );
-  },
-);
-
-Input.displayName = "Input";
+};
 
 export default Input;
