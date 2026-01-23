@@ -1,0 +1,41 @@
+.AuthLayout {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color, #f5f7fa);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  height: 50vh;
+  border-radius: 2em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--text-color);
+}
+
+.outletWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  padding: 2em;
+}
+
+.image {
+  width: 200px;
+  height: auto;
+  margin: 1em;
+  align-self: center;
+}
+
+.outletWrapper {
+  border-radius: 0 2em 2em 0;
+}
+
+.img {
+  border-radius: 2em 0 0 2em;
+}

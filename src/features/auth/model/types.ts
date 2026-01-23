@@ -1,18 +1,4 @@
-export interface User {
-  username: string;
-}
-
-export interface LoginInput {
-  username: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  signIn: {
-    accessToken: string;
-  };
-}
-
-export interface WhoAmIResponse {
-  whoAmI: User;
-}
+export type { UserSummary as User } from "@/shared/api/generated/graphql";
+export type { SignInInput as LoginInput } from "@/shared/api/generated/graphql";
+export type { SignInMutation as LoginResponse } from "@/shared/api/generated/graphql";
+export type { WhoAmIQuery as WhoAmIResponse } from "@/shared/api/generated/graphql";

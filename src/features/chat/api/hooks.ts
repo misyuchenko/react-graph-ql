@@ -1,14 +1,14 @@
 import {
-  useGetUserChatsQuery,
+  useGetChatsQuery,
   useLoadMessagesQuery,
   useLazyLoadMessagesQuery,
   useLazySearchUsersQuery,
   useCreateChatMutation,
   useSendMessageMutation,
-} from "./chatApi";
+} from "@/shared/api/generated/enhanced-api";
 
 export function useGetUserChats() {
-  const { data, isLoading, error, refetch } = useGetUserChatsQuery();
+  const { data, isLoading, error, refetch } = useGetChatsQuery();
 
   return {
     chats: data || [],
@@ -79,7 +79,7 @@ export function useSearchUsers() {
   const [trigger, { data, isLoading, error }] = useLazySearchUsersQuery();
 
   return {
-    searchUsers: (username: string) => trigger(username),
+    searchUsers: (username: string) => trigger({ username }),
     users: data || [],
     loading: isLoading,
     error,
@@ -90,7 +90,7 @@ export function useCreateChat() {
   const [createChatMutation, { data, isLoading, error }] = useCreateChatMutation();
 
   return {
-    createChat: (username: string) => createChatMutation(username),
+    createChat: (username: string) => createChatMutation({ input: { username } }),
     chat: data,
     loading: isLoading,
     error,
@@ -102,7 +102,7 @@ export function useSendMessage() {
 
   return {
     sendMessage: (chatId: string, text: string) =>
-      sendMessageMutation({ chatId, text }),
+      sendMessageMutation({ input: { chatId, text } }),
     message: data,
     loading: isLoading,
     error,

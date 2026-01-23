@@ -1,5 +1,5 @@
-export { default as Chat } from "./ui/Chat";
-export { default as ChatList } from "./ui/ChatList";
+export { default as Chat } from "./ui/Chat/Chat";
+export { default as ChatList } from "./ui/ChatList/ChatList";
 
 export {
   useGetUserChats,
@@ -11,14 +11,14 @@ export {
 } from "./api/hooks";
 
 export {
-  useGetUserChatsQuery,
-  useLazyGetUserChatsQuery,
+  useGetChatsQuery,
+  useLazyGetChatsQuery,
   useLoadMessagesQuery,
   useLazyLoadMessagesQuery,
   useSearchUsersQuery,
   useLazySearchUsersQuery,
   useCreateChatMutation,
   useSendMessageMutation,
-} from "./api/chatApi";
+} from "@/shared/api/generated/enhanced-api";
 
 export type { Chat as ChatType, Message } from "./model/types";

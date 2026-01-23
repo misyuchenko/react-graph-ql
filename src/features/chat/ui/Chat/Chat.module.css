@@ -1,0 +1,32 @@
+.Chat {
+  padding: 10px;
+  grid-area: chat;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-md);
+}
+
+.Chat__messagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.message {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: fit-content;
+  background-color: aqua;
+}
+
+.isOwn {
+  align-self: end;
+  background-color: bisque;
+}

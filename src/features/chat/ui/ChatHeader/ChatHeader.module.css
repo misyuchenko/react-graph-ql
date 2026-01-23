@@ -1,0 +1,9 @@
+.ChatHeader {
+  background-color: var(--primary-color);
+  padding: 20px 10px;
+  border-radius: var(--border-radius-md);
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}

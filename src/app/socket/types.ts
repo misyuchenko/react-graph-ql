@@ -29,7 +29,7 @@ export interface Message {
 
 export interface ChatSummary {
   id: string;
-  title: object;
+  title: string | null;
   createdAt: string;
-  participants: string[];
+  participants: UserSummary[];
 }
