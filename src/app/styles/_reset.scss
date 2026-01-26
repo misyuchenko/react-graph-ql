@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
+// CSS Reset
 *,
 *::before,
 *::after {
@@ -21,6 +20,12 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-primary);
+  font-weight: 400;
+}
+
+#root {
+  min-height: 100dvh;
 }
 
 #root > main {

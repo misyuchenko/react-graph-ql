@@ -1,5 +1,5 @@
 import { memo } from "react";
-import styles from "./ChatHeader.module.css";
+import styles from "./ChatHeader.module.scss";
 
 interface Props {
   chatWith?: string;
@@ -7,7 +7,7 @@ interface Props {
 
 const ChatHeader: React.FC<Props> = ({ chatWith }) => {
   return (
-    <h1 className={styles.ChatHeader}>
+    <h1 className={styles.chatHeader}>
       {chatWith ? `Chat with ${chatWith}` : "No chat selected"}
     </h1>
   );

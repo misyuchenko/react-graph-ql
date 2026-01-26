@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-    }
+    },
   },
   plugins: [
     react({
@@ -20,8 +20,15 @@ export default defineConfig({
   ],
   css: {
     modules: {
-      localsConvention: "camelCase"
-    }
+      localsConvention: "camelCase",
+    },
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @use "@/app/styles/abstracts" as *;
+        `,
+      },
+    },
   },
   server: {
     watch: {

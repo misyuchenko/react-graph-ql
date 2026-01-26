@@ -1,4 +1,4 @@
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 // import SearchUser from "../SearchUser";
 // import { useSearchUser } from "../../model/useSearchUser";
 import Avatar from "@/shared/ui/Avatar/Avatar";
@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className={styles.Header}>
+    <header className={styles.header}>
       <section className={styles.userControls}>
         <Avatar />
         {user && <strong>{user.username}</strong>}

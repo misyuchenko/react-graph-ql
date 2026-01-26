@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, Ref } from "react";
 import { unstable_PasswordToggleField as PasswordToggleField } from "radix-ui";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
-import style from "./Input.module.css";
+import styles from "./Input.module.scss";
 import { cn } from "../../utils";
 
 interface CustomInputProps {
@@ -33,12 +33,12 @@ const Input = ({ error, label, className, withPasswordToggle, type, ref, ...prop
 
       return (
         <div>
-          {label && <label className={style.label}>{label}</label>}
+          {label && <label className={styles.label}>{label}</label>}
           <PasswordToggleField.Root>
-            <div className={style.passwordWrapper}>
+            <div className={styles.passwordWrapper}>
               <PasswordToggleField.Input
                 ref={ref}
-                className={cn(style.Input, style.passwordInput, className)}
+                className={cn(styles.Input, styles.passwordInput, className)}
                 name={name}
                 value={value}
                 defaultValue={defaultValue}
@@ -56,7 +56,7 @@ const Input = ({ error, label, className, withPasswordToggle, type, ref, ...prop
                     | undefined
                 }
               />
-              <PasswordToggleField.Toggle className={style.passwordToggle}>
+              <PasswordToggleField.Toggle className={styles.passwordToggle}>
                 <PasswordToggleField.Icon
                   visible={<EyeOpenIcon />}
                   hidden={<EyeClosedIcon />}
@@ -64,22 +64,22 @@ const Input = ({ error, label, className, withPasswordToggle, type, ref, ...prop
               </PasswordToggleField.Toggle>
             </div>
           </PasswordToggleField.Root>
-          {error && <span className={style.error}>{error}</span>}
+          {error && <span className={styles.error}>{error}</span>}
         </div>
       );
     }
 
     // Обычный input
     return (
-      <div className={style.inputContainer}>
-        {label && <label className={style.label}>{label}</label>}
+      <div className={styles.inputContainer}>
+        {label && <label className={styles.label}>{label}</label>}
         <input
           ref={ref}
           type={type}
-          className={cn(style.Input, className)}
+          className={cn(styles.Input, className)}
           {...props}
         />
-        {error && <span className={style.error}>{error}</span>}
+        {error && <span className={styles.error}>{error}</span>}
       </div>
     );
 };

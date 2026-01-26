@@ -1,5 +1,5 @@
 import { useEffect, useState, type FC } from "react";
-import $style from "./SearchUser.module.css";
+import styles from "./SearchUser.module.scss";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useCreateChat } from "@/features/chat";
 
@@ -35,17 +35,19 @@ const SearchUser: FC<{
   };
 
   return (
-    <nav className={$style.SearchUser}>
+    <nav className={styles.searchUser}>
       <input
-        className={$style.SearchUser__input}
+        className={styles.searchUser__input}
         type="text"
         value={searchTerm}
         onChange={handleSearchChange}
       />
       {loading && <p>Loading...</p>}
       {chatLoading && <p>Creating chat...</p>}
-      {error && <p className={$style.SearchUser__error}>Error: {error.message}</p>}
-      <ul className={$style.SearchUser__usersList}>
+      {error && (
+        <p className={styles.searchUser__error}>Error: {error.message}</p>
+      )}
+      <ul className={styles.searchUser__usersList}>
         {users.map((user) => (
           <li onClick={() => handleUserClick(user)} key={user}>
             {user}

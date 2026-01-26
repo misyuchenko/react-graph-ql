@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { Logo } from "@/shared/assets";
 
-import styles from "./AuthLayout.module.css";
+import styles from "./AuthLayout.module.scss";
 
 export const AuthLayout = () => {
   return (
-    <div className={styles.AuthLayout}>
+    <div className={styles.authLayout}>
       <div className={styles.container}>
         <img className={styles.img} src={Logo} alt="logo" />
         <div className={styles.outletWrapper}>

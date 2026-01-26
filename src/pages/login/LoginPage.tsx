@@ -1,5 +1,5 @@
 import { type FC, useState } from "react";
-import c from "./LoginPage.module.css";
+import styles from "./LoginPage.module.scss";
 import {
   useSignInMutation,
   useLazyWhoAmIQuery,
@@ -50,9 +50,9 @@ const LoginPage: FC = () => {
 
   return (
     <>
-      <div className={c.LoginPage}>
-        <h1 className={c.LoginPage__title}>Login</h1>
-        <form className={c.LoginPage__form} onSubmit={handleLogin}>
+      <div className={styles.loginPage}>
+        <h1 className={styles.loginPage__title}>Login</h1>
+        <form className={styles.loginPage__form} onSubmit={handleLogin}>
           <Input
             label="Username"
             placeholder="Enter your username"
@@ -79,7 +79,7 @@ const LoginPage: FC = () => {
             </div>
           )}
           <button
-            className={c.LoginPage__button}
+            className={styles.loginPage__button}
             type="submit"
             disabled={isLoading || whoAmILoading}
           >

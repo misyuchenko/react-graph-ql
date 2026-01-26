@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { Chat } from "@/entities";
-import $styles from "./ChatList.module.css";
+import styles from "./ChatList.module.scss";
 import { useAuth } from "@/features/auth";
 import ChatListItem from "../ChatListItem/ChatListItem";
 
@@ -13,11 +13,11 @@ const ChatList: FC<ChatListProps> = ({ chats, onSelectChat }) => {
   const { user } = useAuth();
 
   return (
-    <div className={$styles.ChatList}>
+    <div className={styles.chatList}>
       {chats.length ? (
-        <ul className={$styles.list}>
+        <ul className={styles.list}>
           {chats.map((chat) => (
-            <li className={$styles.list__item} key={chat.id}>
+            <li className={styles.list__item} key={chat.id}>
               <ChatListItem
                 chat={chat}
                 onSelectChat={onSelectChat}

@@ -1,5 +1,5 @@
 import { useState, type FC } from "react";
-import $styles from "./ChatMessageInput.module.css";
+import styles from "./ChatMessageInput.module.scss";
 import Button from "@/shared/ui/Button/Button";
 interface Props {
   onSendMessage: (text: string) => void;
@@ -22,9 +22,9 @@ const ChatMessageInput: FC<Props> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className={$styles.ChatMessageInput}>
+    <div className={styles.chatMessageInput}>
       <input
-        className={$styles.input}
+        className={styles.input}
         type="text"
         placeholder="Type your message..."
         value={text}

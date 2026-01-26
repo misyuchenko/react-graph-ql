@@ -1,4 +1,4 @@
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 import { cn } from "@/shared/utils";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {

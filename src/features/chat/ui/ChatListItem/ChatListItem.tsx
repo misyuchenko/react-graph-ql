@@ -1,6 +1,6 @@
 import type { Chat } from "@/entities";
 import type { User } from "@/entities";
-import style from "./ChatListItem.module.css";
+import styles from "./ChatListItem.module.scss";
 
 interface Props {
   chat: Chat;
@@ -10,7 +10,7 @@ interface Props {
 
 const ChatListItem: React.FC<Props> = ({ chat, onSelectChat, user }) => {
   return (
-    <article className={style.ChatListItem}>
+    <article className={styles.chatListItem}>
       {chat.title && <strong>{chat.title}</strong>}
       <p onClick={() => onSelectChat(chat.id)}>
         {chat.participants
