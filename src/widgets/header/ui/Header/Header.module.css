@@ -1,6 +1,6 @@
-.Header {
-  display: flex;
+.header {
   grid-area: header;
+  display: flex;
   padding: 10px;
   background-color: var(--background-color);
   color: var(--text-color);

@@ -3,7 +3,7 @@ import { useSocket } from "@/shared/hooks/useSocket";
 import { useEffect, useMemo, useState, type FC } from "react";
 import { useLazyLoadMessages, useSendMessage } from "../../api/hooks";
 import type { Chat as ChatType, Message } from "../../model/types";
-import $styles from "./Chat.module.css";
+import styles from "./Chat.module.css";
 import { useAuth } from "@/features/auth";
 import ChatMessageInput from "../ChatMessageInput/ChatMessageInput";
 import { cn } from "@/shared/utils";
@@ -97,20 +97,20 @@ const Chat: FC<Props> = ({ chat }) => {
   }, [chat, user]);
 
   return (
-    <div className={$styles.Chat}>
+    <div className={styles.Chat}>
       <ChatHeader chatWith={chatWith} />
 
       {realtimeMessages.length === 0 &&
         initialMessages.length === 0 &&
         !loading && <p>No messages yet. Start the conversation!</p>}
       {loading && <p>Loading messages...</p>}
-      {error && <p className={$styles.Chat__error}>Error: {error.message}</p>}
+      {error && <p className={styles.Chat__error}>Error: {error.message}</p>}
       {sortedMessages.length > 0 && (
-        <ul className={$styles.Chat__messagesList}>
+        <ul className={styles.Chat__messagesList}>
           {sortedMessages.map((msg) => (
             <li
               key={msg.id}
-              className={cn($styles.message, { [$styles.isOwn]: msg.isOwn })}
+              className={cn(styles.message, { [styles.isOwn]: msg.isOwn })}
             >
               {!msg.isOwn && <strong>{msg.sender.username}:</strong>}
 

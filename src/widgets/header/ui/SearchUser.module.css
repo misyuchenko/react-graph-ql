@@ -1,15 +1,14 @@
-.SearchUser {
+.searchUser {
   padding: 10px;
 }
 
-
-.SearchUser__input {
+.searchUser__input {
   width: 100%;
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
 }
 
-.SearchUser__usersList {
+.searchUser__usersList {
   margin-top: 15px;
 }

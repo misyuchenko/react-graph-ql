@@ -7,7 +7,7 @@ interface Props {
 
 const ChatHeader: React.FC<Props> = ({ chatWith }) => {
   return (
-    <h1 className={styles.ChatHeader}>
+    <h1 className={styles.chatHeader}>
       {chatWith ? `Chat with ${chatWith}` : "No chat selected"}
     </h1>
   );

@@ -1,32 +1,27 @@
-.MainLayout {
+.mainLayout {
   padding: clamp(16px, 4vw, 40px);
-  display: grid;
-  grid-template-areas:
-    "header header header header header header header header header header header header"
-    "list list chat chat chat chat chat chat chat chat chat chat";
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto 1fr;
-  gap: clamp(12px, 2vw, 20px);
   min-height: 100dvh;
   background-color: var(--primary-color);
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: auto 1fr;
+  gap: clamp(12px, 2vw, 20px);
+
+  grid-template-areas:
+    "header header"
+    "list   chat";
 }
 
-@media (max-width: 1024px) {
-  .MainLayout {
-    grid-template-areas:
-      "header header header header header header header header header header header header"
-      "list list list list chat chat chat chat chat chat chat chat";
-    grid-template-columns: repeat(12, 1fr);
-  }
-}
+@media (max-width: 639px) {
+  .mainLayout {
+    padding: 0;
 
-@media (max-width: 768px) {
-  .MainLayout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+
     grid-template-areas:
       "header"
-      "list"
-      "chat";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
+      "chat"
+      "menu";
   }
 }

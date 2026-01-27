@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className={styles.Header}>
+    <header className={styles.header}>
       <section className={styles.userControls}>
         <Avatar />
         {user && <strong>{user.username}</strong>}
