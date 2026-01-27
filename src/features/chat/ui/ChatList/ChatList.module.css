@@ -1,6 +1,9 @@
 .chatList {
-  padding: 10px;
+  /* Grid позиционирование */
   grid-area: list;
+
+  /* Стили */
+  padding: 10px;
   background-color: var(--background-color);
   border-radius: var(--border-radius-md);
   height: fit-content;

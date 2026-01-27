@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState, type FC } from "react";
 import { Chat, ChatList, useGetUserChats } from "@/features/chat";
+import { useBreakpoints } from "@/shared/hooks";
 
 const RootPage: FC = () => {
   const [currentChatId, setCurrentChatId] = useState("");
   const { chats: allChats, error } = useGetUserChats();
+
+  const { isDesktop } = useBreakpoints();
 
   const handleSelectChat = (id: string) => {
     setCurrentChatId(id);
@@ -21,7 +24,9 @@ const RootPage: FC = () => {
 
   return (
     <>
-      <ChatList chats={allChats} onSelectChat={handleSelectChat} />
+      {isDesktop && (
+        <ChatList chats={allChats} onSelectChat={handleSelectChat} />
+      )}
       <Chat chat={currentChat} />
     </>
   );

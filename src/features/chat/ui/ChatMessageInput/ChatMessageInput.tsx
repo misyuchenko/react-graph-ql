@@ -1,5 +1,5 @@
 import { useState, type FC } from "react";
-import styles from "./ChatMessageInput.module.scss";
+import styles from "./ChatMessageInput.module.css";
 import Button from "@/shared/ui/Button/Button";
 interface Props {
   onSendMessage: (text: string) => void;

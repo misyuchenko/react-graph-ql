@@ -3,7 +3,7 @@ import { useSocket } from "@/shared/hooks/useSocket";
 import { useEffect, useMemo, useState, type FC } from "react";
 import { useLazyLoadMessages, useSendMessage } from "../../api/hooks";
 import type { Chat as ChatType, Message } from "../../model/types";
-import styles from "./Chat.module.scss";
+import styles from "./Chat.module.css";
 import { useAuth } from "@/features/auth";
 import ChatMessageInput from "../ChatMessageInput/ChatMessageInput";
 import { cn } from "@/shared/utils";

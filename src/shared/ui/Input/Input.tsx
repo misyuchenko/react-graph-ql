@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes, Ref } from "react";
 import { unstable_PasswordToggleField as PasswordToggleField } from "radix-ui";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
-import styles from "./Input.module.scss";
+import styles from "./Input.module.css";
 import { cn } from "../../utils";
 
 interface CustomInputProps {

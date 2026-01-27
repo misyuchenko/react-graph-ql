@@ -1,0 +1,77 @@
+# GraphQL Schema for https://chats-api.mysterygateway.ru/graphql
+
+# ============== Scalars ==============
+scalar DateTime
+
+# ============== Enums ==============
+enum MessageDirection {
+  ASC
+  DESC
+}
+
+# ============== Types ==============
+type UserSummary {
+  username: String!
+}
+
+type AuthPayload {
+  accessToken: String!
+}
+
+type Message {
+  id: ID!
+  chatId: String!
+  sender: UserSummary!
+  text: String!
+  createdAt: DateTime!
+}
+
+type ChatSummary {
+  id: String!
+  title: String
+  createdAt: DateTime!
+  participants: [UserSummary!]!
+}
+
+# ============== Input Types ==============
+input SignUpInput {
+  username: String!
+  password: String!
+}
+
+input SignInInput {
+  username: String!
+  password: String!
+}
+
+input CreateChatInput {
+  username: String!
+}
+
+input SendMessageInput {
+  chatId: ID!
+  text: String!
+}
+
+input MarkReadInput {
+  chatId: ID!
+  seenAt: DateTime!
+}
+
+# ============== Queries ==============
+type Query {
+  sayHello: String!
+  whoAmI: UserSummary!
+  searchUsers(username: String!): [UserSummary!]!
+  getChats: [ChatSummary!]!
+  loadMessages(chatId: ID!, cursor: ID, direction: MessageDirection): [Message!]!
+}
+
+# ============== Mutations ==============
+type Mutation {
+  signUp(input: SignUpInput!): AuthPayload!
+  signIn(input: SignInInput!): AuthPayload!
+  createChat(input: CreateChatInput!): ChatSummary!
+  sendMessage(input: SendMessageInput!): Message!
+  markChatRead(input: MarkReadInput!): Boolean!
+}

@@ -1,0 +1,7 @@
+.mobileMenu {
+  /* Grid позиционирование */
+  grid-area: menu;
+
+  /* Стили */
+  background-color: var(--background-color);
+}

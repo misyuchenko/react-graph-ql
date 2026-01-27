@@ -1,6 +1,6 @@
 import { Avatar as RadixAvatar } from "radix-ui";
 import { image as FallBackAvatar } from "@/shared/assets/images";
-import styles from "./Avatar.module.scss";
+import styles from "./Avatar.module.css";
 
 const Avatar: React.FC = () => (
   <div style={{ display: "flex", gap: 20 }}>

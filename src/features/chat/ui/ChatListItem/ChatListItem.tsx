@@ -1,6 +1,6 @@
 import type { Chat } from "@/entities";
 import type { User } from "@/entities";
-import styles from "./ChatListItem.module.scss";
+import styles from "./ChatListItem.module.css";
 
 interface Props {
   chat: Chat;

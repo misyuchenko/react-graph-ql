@@ -1,4 +1,4 @@
-import styles from "./Header.module.scss";
+import styles from "./Header.module.css";
 // import SearchUser from "../SearchUser";
 // import { useSearchUser } from "../../model/useSearchUser";
 import Avatar from "@/shared/ui/Avatar/Avatar";

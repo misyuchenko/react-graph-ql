@@ -1,5 +1,5 @@
 import { useEffect, useState, type FC } from "react";
-import styles from "./SearchUser.module.scss";
+import styles from "./SearchUser.module.css";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useCreateChat } from "@/features/chat";
 

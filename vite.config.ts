@@ -22,13 +22,6 @@ export default defineConfig({
     modules: {
       localsConvention: "camelCase",
     },
-    preprocessorOptions: {
-      scss: {
-        additionalData: `
-          @use "@/app/styles/abstracts" as *;
-        `,
-      },
-    },
   },
   server: {
     watch: {

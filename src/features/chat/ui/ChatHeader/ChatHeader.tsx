@@ -1,5 +1,5 @@
 import { memo } from "react";
-import styles from "./ChatHeader.module.scss";
+import styles from "./ChatHeader.module.css";
 
 interface Props {
   chatWith?: string;

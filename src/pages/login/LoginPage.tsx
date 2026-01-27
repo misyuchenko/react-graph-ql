@@ -1,5 +1,5 @@
 import { type FC, useState } from "react";
-import styles from "./LoginPage.module.scss";
+import styles from "./LoginPage.module.css";
 import {
   useSignInMutation,
   useLazyWhoAmIQuery,
